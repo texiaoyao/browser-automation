@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
-广州市中小学教师继续教育网 - 专用适配器
-
-平台地址：http://www.gzzjwx.com/
+通用学习平台适配器
 
 使用方法:
-    python gzzjwx_adapter.py --url <课程 URL>
+    python platform_adapter.py --url <课程 URL>
 """
 
 import sys
@@ -24,12 +22,12 @@ from course_navigator import CourseNavigator
 
 
 # ============================================================
-# 广州市中小学教师继续教育网 - 平台特定选择器
+# 通用学习平台选择器配置
 # ============================================================
-# 注意：以下选择器需要根据实际页面结构调整
+# 注意：以下选择器需要根据实际平台结构调整
 # 使用 selector_debug.py 工具来抓取准确的选择器
 
-GZZJWX_SELECTORS = {
+PLATFORM_SELECTORS = {
     # 视频播放器相关
     'video': {
         'player': 'video, #video-player, .video-player, .prism-player, .edui-player',
@@ -73,8 +71,8 @@ GZZJWX_SELECTORS = {
 }
 
 
-class GZZJWXAdapter:
-    """广州市中小学教师继续教育网专用适配器"""
+class PlatformAdapter:
+    """通用学习平台适配器"""
     
     def __init__(self, url, username=None, password=None, headless=False):
         """
@@ -92,12 +90,12 @@ class GZZJWXAdapter:
         self.headless = headless
         
         self.browser = None
-        self.selectors = GZZJWX_SELECTORS
+        self.selectors = PLATFORM_SELECTORS
     
     def start(self):
         """启动自动化流程"""
         print("\n" + "="*60)
-        print("🎓 广州市中小学教师继续教育网 - 自动化助手")
+        print("🎓 学习平台自动化助手")
         print("="*60 + "\n")
         
         # 初始化浏览器
@@ -278,7 +276,7 @@ class GZZJWXAdapter:
         """
         处理测验弹窗
         
-        广州市中小学教师继续教育网的测验特点：
+        常见测验特点：
         - 可能是单选题或多选题
         - 通常有"确认"或"提交"按钮
         - 完成后自动继续播放
@@ -333,18 +331,18 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description='广州市中小学教师继续教育网 - 自动化助手',
+        description='学习平台自动化助手',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''
 示例:
     # 手动登录
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123
+    python platform_adapter.py --url https://example.com/course/123
     
     # 自动登录
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --username your_user --password your_pass
+    python platform_adapter.py --url https://example.com/course/123 --username your_user --password your_pass
     
     # 无头模式
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --headless
+    python platform_adapter.py --url https://example.com/course/123 --headless
         '''
     )
     
@@ -356,7 +354,7 @@ def main():
     
     args = parser.parse_args()
     
-    adapter = GZZJWXAdapter(
+    adapter = PlatformAdapter(
         url=args.url,
         username=args.username,
         password=args.password,
