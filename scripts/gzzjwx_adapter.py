@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-通用学习平台适配器
+学习平台通用适配器
 
 使用方法:
-    python platform_adapter.py --url <课程 URL>
+    python gzzjwx_adapter.py --url <课程 URL>
 """
 
 import sys
@@ -22,12 +22,12 @@ from course_navigator import CourseNavigator
 
 
 # ============================================================
-# 通用学习平台选择器配置
+# 学习平台 - 平台特定选择器
 # ============================================================
-# 注意：以下选择器需要根据实际平台结构调整
+# 注意：以下选择器需要根据实际页面结构调整
 # 使用 selector_debug.py 工具来抓取准确的选择器
 
-PLATFORM_SELECTORS = {
+GZZJWX_SELECTORS = {
     # 视频播放器相关
     'video': {
         'player': 'video, #video-player, .video-player, .prism-player, .edui-player',
@@ -71,8 +71,8 @@ PLATFORM_SELECTORS = {
 }
 
 
-class PlatformAdapter:
-    """通用学习平台适配器"""
+class GZZJWXAdapter:
+    """学习平台专用适配器"""
     
     def __init__(self, url, username=None, password=None, headless=False):
         """
@@ -90,7 +90,7 @@ class PlatformAdapter:
         self.headless = headless
         
         self.browser = None
-        self.selectors = PLATFORM_SELECTORS
+        self.selectors = GZZJWX_SELECTORS
     
     def start(self):
         """启动自动化流程"""
@@ -336,13 +336,13 @@ def main():
         epilog='''
 示例:
     # 手动登录
-    python platform_adapter.py --url https://example.com/course/123
+    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123
     
     # 自动登录
-    python platform_adapter.py --url https://example.com/course/123 --username your_user --password your_pass
+    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --username your_user --password your_pass
     
     # 无头模式
-    python platform_adapter.py --url https://example.com/course/123 --headless
+    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --headless
         '''
     )
     
@@ -354,7 +354,7 @@ def main():
     
     args = parser.parse_args()
     
-    adapter = PlatformAdapter(
+    adapter = GZZJWXAdapter(
         url=args.url,
         username=args.username,
         password=args.password,

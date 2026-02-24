@@ -34,7 +34,7 @@ browser-automation/
     ├── video_controller.py     # 视频控制器
     ├── course_navigator.py     # 课程导航器
     ├── main.py                 # 通用主程序
-    ├── platform_adapter.py     # 通用平台适配器
+    ├── gzzjwx_adapter.py       # 学习平台适配器
     ├── selector_debug.py       # 选择器调试工具
     ├── example_usage.py        # 使用示例
     └── requirements.txt        # Python 依赖
@@ -59,17 +59,17 @@ playwright install
 python main.py --url <目标 URL>
 ```
 
-#### 平台适配器模式
+#### 学习平台适配器
 ```bash
 # 手动登录
-python platform_adapter.py --url https://example.com/course/xxx
+python gzzjwx_adapter.py --url <课程 URL>
 
 # 自动登录
-python platform_adapter.py --url https://example.com/course/xxx \
+python gzzjwx_adapter.py --url <课程 URL> \
     --username 你的账号 --password 你的密码
 
 # 无头模式（后台运行）
-python platform_adapter.py --url https://example.com/course/xxx --headless
+python gzzjwx_adapter.py --url <课程 URL> --headless
 ```
 
 ---
@@ -79,7 +79,7 @@ python platform_adapter.py --url https://example.com/course/xxx --headless
 ### 步骤 1: 使用调试工具抓取选择器
 
 ```bash
-python selector_debug.py --url https://example.com/
+python selector_debug.py --url <目标平台 URL>
 ```
 
 常用命令：
@@ -90,10 +90,10 @@ python selector_debug.py --url https://example.com/
 
 ### 步骤 2: 更新选择器配置
 
-编辑 `platform_adapter.py` 中的 `PLATFORM_SELECTORS`:
+编辑 `gzzjwx_adapter.py` 中的 `GZZJWX_SELECTORS`:
 
 ```python
-PLATFORM_SELECTORS = {
+GZZJWX_SELECTORS = {
     'video': {
         'player': 'video, #video-player',  # 根据实际调整
         'play_btn': '.play-btn',
@@ -113,7 +113,7 @@ PLATFORM_SELECTORS = {
 ### 步骤 3: 测试运行
 
 ```bash
-python platform_adapter.py --url <课程 URL> --max-videos 2
+python gzzjwx_adapter.py --url <课程 URL> --max-videos 2
 ```
 
 ---
@@ -221,4 +221,4 @@ import pdb; pdb.set_trace()
 **技能位置**: `/Users/bbaa/.openclaw/workspace/skills/browser-automation/`
 
 **版本**: 1.0
-**最后更新**: 2026-02-24
+**最后更新**: 2026-02-23
