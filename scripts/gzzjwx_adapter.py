@@ -336,13 +336,13 @@ def main():
         epilog='''
 示例:
     # 手动登录
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123
+    python gzzjwx_adapter.py --url <课程 URL>
     
     # 自动登录
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --username your_user --password your_pass
+    python gzzjwx_adapter.py --url <课程 URL> --username your_user --password your_pass
     
     # 无头模式
-    python gzzjwx_adapter.py --url http://www.gzzjwx.com/course/123 --headless
+    python gzzjwx_adapter.py --url <课程 URL> --headless
         '''
     )
     
